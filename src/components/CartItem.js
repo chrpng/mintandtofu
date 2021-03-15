@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'semantic-ui-react'
 
-import { useShoppingCart } from 'use-shopping-cart'
+import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
 import styled from 'styled-components'
 
@@ -10,6 +10,9 @@ import QuantityPicker from './QuantityPicker'
 const StyledCartItemDiv = styled.div`
 	display: flex;
 	align-items: flex-start;
+
+	border-bottom: 1px solid #aaaaaa;
+	padding: 16px 0;
 
 	.cart-item {
 		width: 100%;
@@ -55,7 +58,7 @@ const CartItem = ({ item }) => {
 						/>
 					</div>
 					<div className="cart-item__cost">
-						${(item.price * item.quantity / 100).toFixed( 2 )}
+						{formatCurrencyString({ value: item.price, currency: 'USD' })}
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Button } from 'semantic-ui-react'
+import { Button } from './Buttons.styles'
 import CartItem from './CartItem'
 import { useShoppingCart } from 'use-shopping-cart'
 
@@ -11,6 +11,12 @@ const StyledCart = styled.div`
 	display: flex;
 	flex-flow: column;
 	height: 100vh;
+	
+	h2 {
+		border-bottom: 1px solid #aaaaaa;
+		padding: 32px 0;
+		margin-bottom: 0;
+	}
 
 	.cart-section {
 		flex: 1 1 auto;
@@ -19,20 +25,9 @@ const StyledCart = styled.div`
 
 	.checkout-section {
 		flex: 0 1 100px;
+		border-top: 1px solid #aaaaaa;
 	}
 `
-
-const buttonStyles = {
-  fontSize: '13px',
-  textAlign: 'center',
-  color: '#fff',
-  outline: 'none',
-  padding: '12px',
-  boxShadow: '2px 5px 10px rgba(0,0,0,.1)',
-  backgroundColor: 'rgb(255, 178, 56)',
-  borderRadius: '6px',
-  letterSpacing: '1.5px',
-}
 
 const buttonDisabledStyles = {
   opacity: "0.5",
@@ -55,22 +50,23 @@ const Cart = () => {
 
   return (
     <StyledCart>
+			<h2>CART</h2>
 			<div className="cart-section">
 				{/* This is where we'll render our cart */}
 				{
 					cartDetailsArray.map((item) => <CartItem key={item.id} item={item} />)
 				}
-				<Button style={buttonStyles} onClick={clearCart}>
+				<Button onClick={clearCart}>
 					Clear cart
 				</Button>
 			</div>
 			<div className="checkout-section">
 				<p>Subtotal: {formattedTotalPrice}</p>
-				<p>Shipping and taxes will be calculated at checkout uwu</p>
+				<p>Shipping and taxes will be calculated at checkout.</p>
 
 				{/* Redirects the user to Stripe */}
 				<Button
-					style={loading ? { ...buttonStyles, ...buttonDisabledStyles } : buttonStyles}
+					style={loading ? buttonDisabledStyles : null}
 					disabled={loading}
 					onClick={() => {
 						setLoading(true)
