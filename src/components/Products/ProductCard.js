@@ -1,29 +1,32 @@
 import React from 'react'
 
-import { Card, Image } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
+import { Card } from '../Card.styles'
 import { Button } from '../Buttons.styles'
 import { Link } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
-const ProductCard = ({sku}) => {
-  const { addItem } = useShoppingCart()
+const ProductCard = ({ sku }) => {
+  const { addItem, cartDetails } = useShoppingCart()
 
 	const handleButtonClick = (e) => {
 		e.preventDefault()
-		addItem(sku)
+		const { description, route, ...minSku } = sku
+		console.log(minSku)
+		console.log(cartDetails[minSku.id])
+		addItem(minSku)
 		// e.stopPropagation()
 	}
 
 	return (
-		<Card as={Link} to={`/${sku.route}`}>
-			<Image wrapped ui src={sku.image} alt={sku.name} />
+		<Card as={Link} to={`/${sku.route}`} className="card">
+			<Image wrapped src={sku.image} alt={sku.name} />
 			<Card.Content>
 				<Card.Header>{sku.name}</Card.Header>
 				<Card.Meta>
 					{/* {(sku.price / 100).toLocaleString("en-US", {style:"currency", currency:"USD"})} */}
-					{formatCurrencyString({ value: sku.price, currency: 'USD' })}
+					{/* {formatCurrencyString({ value: sku.price, currency: 'USD' })} */}
 				</Card.Meta>
 				<Card.Description>{sku.description}</Card.Description>
 			</Card.Content>

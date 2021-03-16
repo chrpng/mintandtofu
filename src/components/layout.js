@@ -10,8 +10,9 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./Header"
+import Footer from "./Footer"
 import CartOverview from "./CartOverview"
-import CartProviderWrapper from './CartProviderWrapper'
+// import CartProviderWrapper from './CartProviderWrapper'
 
 import { Sidebar } from 'semantic-ui-react'
 
@@ -34,49 +35,40 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <CartProviderWrapper>
-			<Sidebar.Pushable style={{ transform: `none` }}> {/* for sticky sidebar: transform changes positioning context to parent container, removing sets context to viewport*/}
-				<Sidebar
-					animation='overlay'
-					direction='right'
-					onHide={() => setVisible(false)}
-					visible={visible}
-					width='wide'
-					style={{ backgroundColor: `white`, transitionDuration: `0.2s`, transitionTimingFunction: `ease-out` }}
-				>
-					<CartOverview />
-				</Sidebar>
+		<Sidebar.Pushable style={{ transform: `none` }}> {/* for sticky sidebar: transform changes positioning context to parent container, removing sets context to viewport*/}
+			<Sidebar
+				animation='overlay'
+				direction='right'
+				onHide={() => setVisible(false)}
+				visible={visible}
+				width='wide'
+				style={{ backgroundColor: `white`, transitionDuration: `0.2s`, transitionTimingFunction: `ease-out` }}
+			>
+				<CartOverview />
+			</Sidebar>
 
-				<Sidebar.Pusher dimmed={visible}>
-					<Header siteTitle={data.site.siteMetadata?.title || `Title`} toggleVisible={toggleVisible}/>
-					<div
+			<Sidebar.Pusher dimmed={visible}>
+				<Header siteTitle={data.site.siteMetadata?.title || `Title`} toggleVisible={toggleVisible}/>
+				<div
+					style={{
+						margin: `0 auto`,
+						maxWidth: 960,
+						padding: `1.0875rem 1.45rem`,
+					}}
+				>
+					<div 
 						style={{
-							margin: `0 auto`,
-							maxWidth: 960,
-							padding: `0 1.0875rem 1.45rem`,
+							display: `flex`,
+							alignItems: `flex-start`
 						}}
 					>
-						<div 
-							style={{
-								display: `flex`,
-								alignItems: `flex-start`
-							}}
-						>
-							<main>{children}</main>
-						</div>
-						<footer
-							style={{
-								marginTop: `2rem`,
-							}}
-						>
-							© {new Date().getFullYear()}, Built with
-							{` `}
-							<a href="https://www.gatsbyjs.com">Gatsby</a>
-						</footer>
+						<main>{children}</main>
 					</div>
-				</Sidebar.Pusher>
-			</Sidebar.Pushable>
-    </CartProviderWrapper>
+
+				</div>
+				<Footer />
+			</Sidebar.Pusher>
+		</Sidebar.Pushable>
   )
 }
 

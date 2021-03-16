@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 
-import { Button } from './Buttons.styles'
+import { DarkButton } from './Buttons.styles'
 import CartItem from './CartItem'
 import { useShoppingCart } from 'use-shopping-cart'
 
 import styled from 'styled-components'
 
 const StyledCart = styled.div`
-	padding: 16px 8px;
+	padding: 32px;
 	display: flex;
 	flex-flow: column;
 	height: 100vh;
@@ -24,6 +24,7 @@ const StyledCart = styled.div`
 	}
 
 	.checkout-section {
+		padding: 16px 0;
 		flex: 0 1 100px;
 		border-top: 1px solid #aaaaaa;
 	}
@@ -41,31 +42,22 @@ const Cart = () => {
 		cartDetails,
     formattedTotalPrice,
     redirectToCheckout,
-    cartCount,
-    clearCart,
   } = useShoppingCart()
 	
 	const cartDetailsArray = Object.values(cartDetails)
-	console.log(cartDetailsArray)
+	// console.log(cartDetailsArray)
 
   return (
     <StyledCart>
 			<h2>CART</h2>
 			<div className="cart-section">
-				{/* This is where we'll render our cart */}
-				{
-					cartDetailsArray.map((item) => <CartItem key={item.id} item={item} />)
-				}
-				<Button onClick={clearCart}>
-					Clear cart
-				</Button>
+				{cartDetailsArray.map((item) => <CartItem key={item.id} item={item} />)}
 			</div>
 			<div className="checkout-section">
-				<p>Subtotal: {formattedTotalPrice}</p>
+				{/* <p>Subtotal: {formattedTotalPrice}</p> */}
 				<p>Shipping and taxes will be calculated at checkout.</p>
 
-				{/* Redirects the user to Stripe */}
-				<Button
+				<DarkButton
 					style={loading ? buttonDisabledStyles : null}
 					disabled={loading}
 					onClick={() => {
@@ -74,7 +66,7 @@ const Cart = () => {
 					}}
 				>
 					{loading ? 'Loading...' : 'Checkout'}
-				</Button>
+				</DarkButton>
 			</div>
     </StyledCart>
   )

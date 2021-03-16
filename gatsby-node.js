@@ -35,7 +35,7 @@ exports.createPages = async ({ graphql, actions }) => {
 		}
 	`)
 
-	const productPageTemplate = path.resolve("src/templates/ProductPage.jsx")
+	const productPageTemplate = path.resolve("src/templates/ProductPage.js")
 
 	pages.data.allStripePrice.edges.forEach(edge => {
 		createPage({

@@ -9,6 +9,7 @@ const StyledQuantityPicker = styled.div`
 	button {
 		background: white;
 		border: 1px solid #aaaaaa;
+		cursor: pointer;
 	}
 
 	.display-quantity {

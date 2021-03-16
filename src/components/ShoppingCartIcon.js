@@ -13,7 +13,7 @@ const CartCountProvider = styled.div`
 		top: -8px;
 		right: -8px;
 
-		padding: 4px;
+		padding: 1px 4px;
 		font-size: 12px;
 
 		background: red;
@@ -35,7 +35,7 @@ const ShoppingCartIcon = () => {
 				formats={["AUTO", "WEBP", "AVIF"]}
 				alt="Mint and Tofu logo"
 			/>
-			{/* <div>Cart</div> */}
+			{/* <i className="shopping cart icon heading"></i> */}
 			{(cartCount > 0) ? <span className="cart__badge">{cartCount}</span> : null}
 		</CartCountProvider>
 	)

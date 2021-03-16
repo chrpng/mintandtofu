@@ -8,43 +8,66 @@ import { Menu } from 'semantic-ui-react'
 import { StaticImage } from "gatsby-plugin-image"
 
 const Header = ({ siteTitle, toggleVisible }) => (
-  <Menu
-    style={{
-			backgroundColor: `#f8f7e2`,
-			marginBottom: `0`
-    }}
-		pointing
-		secondary
-  >
-		<Menu.Item
-			as={Link}
-			to="/"
+	<nav style={{ textAlign: `center` }}>
+		<Menu
 			style={{
-				color: `black`,
-				textDecoration: `none`,
-				display: 'flex',
-				alignItems: 'center',
+				color: `#cef3c6`,
+				marginBottom: `0`
 			}}
+			secondary
+			widths={3}
 		>
-			<StaticImage
-				src="../images/mintofu3.png"
-				placeholder="blurred"
-				width={100}
-				quality={95}
-				formats={["AUTO", "WEBP", "AVIF"]}
-				alt="Mint and Tofu logo"
-			/>
-			{siteTitle}
-		</Menu.Item>
-		<Menu.Menu position='right'>
-			<Menu.Item>
+			<Menu.Item></Menu.Item>
+			<Menu.Item
+				as={Link}
+				to="/"
+				fitted
+				>
+				<StaticImage
+					src="../images/mintofuheader.png"
+					placeholder="blurred"
+					width={300}
+					quality={95}
+					formats={["AUTO", "WEBP", "AVIF"]}
+					alt="Mint and Tofu logo"
+					/>
+			</Menu.Item>
+			<Menu.Item></Menu.Item>
+		</Menu>
+		<Menu compact>
+			<Menu.Item
+				as={Link}
+				to="/"
+				className="heading"
+			>
+				Home
+			</Menu.Item>
+			<Menu.Item
+				as={Link}
+				to="/news"
+				className="heading"
+			>
+				News
+			</Menu.Item>
+			<Menu.Item
+				as={Link}
+				to="/stickers"
+				className="heading"
+			>
+				Stickers
+			</Menu.Item>
+			<Menu.Item
+				as={Link}
+				to="/about"
+				className="heading"
+			>
 				About Us
 			</Menu.Item>
 			<Menu.Item onClick={toggleVisible}>
 				<ShoppingCartIcon />
 			</Menu.Item>
-		</Menu.Menu>
-  </Menu>
+		</Menu>
+	</nav>
 )
 
 Header.propTypes = {
