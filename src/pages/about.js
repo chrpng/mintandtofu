@@ -1,43 +1,65 @@
 import * as React from 'react'
 
-import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 
 import { StaticImage } from "gatsby-plugin-image"
 
 import { Grid } from "semantic-ui-react"
 
+import styled from 'styled-components'
+
+const CustomGrid = styled.div`
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	text-align: center;
+	align-items: center;
+
+	padding: 16px 0;
+	row-gap: 32px;
+
+	.about-description {
+		grid-column: 1 / -1;
+	}
+
+	@media (max-width: 790px) {
+		grid-template-columns: 1fr 1fr;
+
+		.about-image {
+			order: 3;
+			grid-column: 1 / -1;
+		}
+	}
+`
+
 const AboutPage = () => (
-  <Layout>
+  <React.Fragment>
     <SEO title="Home" />
     
-    <Grid textAlign="center">
-			<Grid.Row columns={1}>
+		<CustomGrid>
+			<div className="about-description">
 				<h3>About</h3>
 				<p>We are Mint and Tofu, a pair of independent illustrators based out of the northeastern United States. We hope we can bring to you the gift of cute accessories to brighten up your day! All orders are handled in our home studio.</p> 
-			</Grid.Row>
-			<Grid.Row columns={3} textAlign="center" verticalAlign="middle">
-				<Grid.Column>
-					<div>Tofu</div>
-					<div><em>Artist, Web Developer</em></div>
-				</Grid.Column>
-				<Grid.Column>
-					<StaticImage
-						src="../images/aboutpic.png"
-						placeholder="blurred"
-						width={300}
-						quality={95}
-						formats={["AUTO", "WEBP", "AVIF"]}
-						alt="Mint and Tofu logo"
-					/>
-				</Grid.Column>
-				<Grid.Column>
-					<div>Mint</div>
-					<div><em>Artist, Social Media</em></div>
-				</Grid.Column>
-			</Grid.Row>
-    </Grid>
-  </Layout>
+			</div>
+			<div>
+				<div>Tofu</div>
+				<div><em>Artist, Web Dev</em></div>
+			</div>
+			<div className="about-image">
+				<StaticImage
+					src="../images/aboutpic.png"
+					placeholder="blurred"
+					width={300}
+					quality={95}
+					formats={["AUTO", "WEBP", "AVIF"]}
+					alt="Mint and Tofu logo"
+				/>
+			</div>
+			<div>
+				<div>Mint</div>
+				<div><em>Artist, Social Media</em></div>
+			</div>
+		</CustomGrid>
+  </React.Fragment>
 )
 
 export default AboutPage

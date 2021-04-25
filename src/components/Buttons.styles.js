@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import * as Semantic from 'semantic-ui-react'
 
 export const Button = styled(Semantic.Button)`
-	&& {
+	&&& {
 		box-sizing: border-box;
 		font-size: 13px;
 		outline: none;
@@ -31,7 +31,7 @@ export const Button = styled(Semantic.Button)`
 `
 
 export const DarkButton = styled(Button)`
-	&& {
+	&&& {
 		width: 100%;
 		border: none;
 		color: #fff;
@@ -41,5 +41,13 @@ export const DarkButton = styled(Button)`
 			color: #fff;
 			background-color: black;
 		}
+	}
+`
+
+export const BlankButton = styled(Semantic.Button)`
+	&&& {
+		border: none;
+		background-color: transparent;
+		padding: 0;
 	}
 `

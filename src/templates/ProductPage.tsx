@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { graphql } from 'gatsby'
+import { PageProps, graphql } from 'gatsby'
 
 import SEO from '../components/SEO'
-import Layout from '../components/Layout'
 
 import { Grid, Image } from 'semantic-ui-react'
 import { Button } from '../components/Buttons.styles'
 
 import QuantityPicker from '../components/QuantityPicker'
+import AddItemWidget from '../components/AddItemWidget'
 
-import { useShoppingCart } from 'use-shopping-cart'
+import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
 //     return (
 //       <Layout location={this.props.location}>
@@ -21,7 +21,22 @@ import { useShoppingCart } from 'use-shopping-cart'
 //   }
 // }
 
-const ProductPageTemplate = ({ data }) => {
+type DataProps = {
+  stripePrice: {
+    id: string,
+		active: boolean,
+		currency: string,
+		unit_amount: number,
+		product: {
+			id: string,
+			name: string,
+			images: string[],
+			description: string,
+		}
+  }
+}
+
+const ProductPageTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
 	const { addItem } = useShoppingCart()
 	const [ quantity, setQuantity ] = useState(1)
 
@@ -49,7 +64,7 @@ const ProductPageTemplate = ({ data }) => {
 	}
 
   return (
-    <Layout>
+    <React.Fragment>
 			<SEO title={stripePrice.product.name} />
 			<Grid>
 				<Grid.Row columns={2}>
@@ -57,25 +72,19 @@ const ProductPageTemplate = ({ data }) => {
 						<Image wrapped src={product.image} alt={product.name} />
 					</Grid.Column>
 					<Grid.Column>
-						<h1>{product.name}</h1>
-						{/* <h2>{formatCurrencyString({ value: product.price, currency: 'USD' })}</h2> */}
-						{/* <h2>{(product.price / 100).toLocaleString("en-US", {style:"currency", currency:"USD"})}</h2> */}
-						<h2>${product.price}</h2>
-						<div>{product.description}</div>
+						<h3>{product.name}</h3>
+						<h4>{formatCurrencyString({ value: product.price, currency: 'USD' })}</h4>
 
-						<QuantityPicker
-							decrementFunction={decreaseQuantity}
-							incrementFunction={increaseQuantity}
-							quantity={quantity}
-						/>
-						<Button onClick={() => handleButtonClick(product, quantity)}>
-							ADD TO CART
-						</Button>
+						<div style={{ width: `50%`, marginBottom: `32px` }}>
+							<AddItemWidget product={product} />
+						</div>
+
+						<div>{product.description}</div>
 					</Grid.Column>
 
 				</Grid.Row>
 			</Grid>
-    </Layout>
+    </React.Fragment>
   )
 }
 
@@ -93,9 +102,6 @@ export const pageQuery = graphql`
 				name
 				images
 				description
-				metadata {
-					route
-				}
 			}
 		}
   }

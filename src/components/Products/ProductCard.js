@@ -8,27 +8,26 @@ import { Link } from 'gatsby'
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
 const ProductCard = ({ sku }) => {
-  const { addItem, cartDetails } = useShoppingCart()
+  const { addItem } = useShoppingCart()
 
 	const handleButtonClick = (e) => {
 		e.preventDefault()
 		const { description, route, ...minSku } = sku
-		console.log(minSku)
-		console.log(cartDetails[minSku.id])
 		addItem(minSku)
 		// e.stopPropagation()
 	}
 
+	const slug = sku.name.toLowerCase().replace(" ", "-")
+
 	return (
-		<Card as={Link} to={`/${sku.route}`} className="card">
+		<Card as={Link} to={`/${slug}`} className="card">
 			<Image wrapped src={sku.image} alt={sku.name} />
 			<Card.Content>
 				<Card.Header>{sku.name}</Card.Header>
 				<Card.Meta>
 					{/* {(sku.price / 100).toLocaleString("en-US", {style:"currency", currency:"USD"})} */}
-					{/* {formatCurrencyString({ value: sku.price, currency: 'USD' })} */}
+					{formatCurrencyString({ value: sku.price, currency: 'USD' })}
 				</Card.Meta>
-				<Card.Description>{sku.description}</Card.Description>
 			</Card.Content>
 			<Card.Content extra>
 				<Button onClick={(e) => handleButtonClick(e)}>

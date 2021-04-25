@@ -5,6 +5,7 @@ import styled from 'styled-components'
 const StyledQuantityPicker = styled.div`
 	display: flex;
 	width: 100%;
+	margin-bottom: 16px;
 
 	button {
 		background: white;
@@ -23,9 +24,9 @@ const StyledQuantityPicker = styled.div`
 const QuantityPicker = ({ decrementFunction, incrementFunction, quantity }) => {
 	return (
 		<StyledQuantityPicker>
-			<button onClick={decrementFunction}>-</button>
-			<div className="display-quantity">{quantity}</div>
-			<button onClick={incrementFunction}>+</button>
+			<button className="value" onClick={decrementFunction}>-</button>
+			<div className="display-quantity value">{quantity}</div>
+			<button className="value" onClick={incrementFunction}>+</button>
 		</StyledQuantityPicker>
 	)
 }

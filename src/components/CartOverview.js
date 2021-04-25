@@ -12,15 +12,31 @@ const StyledCart = styled.div`
 	flex-flow: column;
 	height: 100vh;
 	
-	h2 {
+	.cart-header {
+		display: flex;
+		justify-content: space-between;
+		align-tems: center;
 		border-bottom: 1px solid #aaaaaa;
 		padding: 32px 0;
 		margin-bottom: 0;
 	}
 
+	.close {
+		cursor: pointer;
+		color: #666;
+		
+		&:hover {
+			color: black;
+		}
+	}
+
 	.cart-section {
 		flex: 1 1 auto;
 		overflow-y: auto;
+		margin-left: -32px;
+		margin-right: -32px;
+		padding-left: 32px;
+		padding-right: 32px;
 	}
 
 	.checkout-section {
@@ -35,7 +51,7 @@ const buttonDisabledStyles = {
   cursor: "not-allowed",
 }
 
-const Cart = () => {
+const Cart = ({ toggleVisible }) => {
   const [loading, setLoading] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
@@ -49,12 +65,15 @@ const Cart = () => {
 
   return (
     <StyledCart>
-			<h2>CART</h2>
+			<div className="cart-header">
+				<h2>CART</h2>
+				<div onClick={toggleVisible}><i className="close icon large"></i></div>
+			</div>
 			<div className="cart-section">
 				{cartDetailsArray.map((item) => <CartItem key={item.id} item={item} />)}
 			</div>
 			<div className="checkout-section">
-				{/* <p>Subtotal: {formattedTotalPrice}</p> */}
+				<p className="value">SUBTOTAL: {formattedTotalPrice}</p>
 				<p>Shipping and taxes will be calculated at checkout.</p>
 
 				<DarkButton

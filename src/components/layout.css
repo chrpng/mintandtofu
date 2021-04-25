@@ -10,7 +10,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: hsla(0, 0%, 0%, 0.8);
-  /* font-family: georgia, serif; */
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -18,6 +17,21 @@ body {
   -ms-font-feature-settings: "kern", "liga", "clig", "calt";
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
+}
+body #___gatsby,
+#___gatsby div {
+	font-family: 'Poppins', Helvetica, Arial, sans-serif;
+}
+
+#___gatsby a,
+#___gatsby h2,
+#___gatsby h3 {
+	font-family: 'Varela Round', Helvetica, Arial, sans-serif;
+}
+
+#___gatsby .value {
+	font-family: 'Syncopate', Helvetica, Arial, sans-serif;
+	font-size: 0.875em;
 }
 
 h3, 
@@ -27,5 +41,8 @@ h3,
 
 h3 {
 	text-transform: uppercase;
-	padding: 32px 0;
+}
+
+.no-scroll {
+	overflow: hidden;
 }

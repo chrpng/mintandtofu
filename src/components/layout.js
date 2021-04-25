@@ -12,7 +12,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./Header"
 import Footer from "./Footer"
 import CartOverview from "./CartOverview"
-// import CartProviderWrapper from './CartProviderWrapper'
 
 import { Sidebar } from 'semantic-ui-react'
 
@@ -21,6 +20,16 @@ import "./layout.css"
 
 const Layout = ({ children }) => {
 	const [visible, setVisible] = React.useState(false)
+
+	React.useEffect(() => {
+		if (document && visible) {
+			document.body.style.overflow = 'hidden';
+			document.body.style.paddingRight = 'calc(100vw - 100%)';
+		} else {
+			document.body.style.overflow = 'auto';
+			document.body.style.paddingRight = '0';
+		}
+	}, [visible])
 
 	const toggleVisible = () => setVisible(!visible)
 
@@ -42,30 +51,23 @@ const Layout = ({ children }) => {
 				onHide={() => setVisible(false)}
 				visible={visible}
 				width='wide'
-				style={{ backgroundColor: `white`, transitionDuration: `0.2s`, transitionTimingFunction: `ease-out` }}
+				style={{ backgroundColor: `white`, transitionDuration: `0.2s`, transitionTimingFunction: `ease-out`, position: `fixed` }}
 			>
-				<CartOverview />
+				<CartOverview toggleVisible={toggleVisible}/>
 			</Sidebar>
 
-			<Sidebar.Pusher dimmed={visible}>
+			<Sidebar.Pusher dimmed={visible} style={{ minHeight: `100vh`, display: `flex`, flexFlow: `column` }}>
 				<Header siteTitle={data.site.siteMetadata?.title || `Title`} toggleVisible={toggleVisible}/>
-				<div
+				<main
 					style={{
 						margin: `0 auto`,
 						maxWidth: 960,
 						padding: `1.0875rem 1.45rem`,
+						flexGrow: `1`,
 					}}
-				>
-					<div 
-						style={{
-							display: `flex`,
-							alignItems: `flex-start`
-						}}
 					>
-						<main>{children}</main>
-					</div>
-
-				</div>
+					{children}
+				</main>
 				<Footer />
 			</Sidebar.Pusher>
 		</Sidebar.Pushable>

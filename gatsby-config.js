@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Mint and Tofu`,
-    description: `The corner of the internet for Mint and Tofu trinkets`,
+    description: `Mint and Tofu's corner of the internet`,
     author: `@doodletofuu`,
   },
   plugins: [
@@ -29,7 +29,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/mintofu3.png`, // This path is relative to the root of the site.
+        icon: `src/images/mintofuicon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-gatsby-cloud`,
@@ -40,6 +40,28 @@ module.exports = {
 				secretKey: process.env.GATSBY_STRIPE_SECRET_KEY,
 				downloadFiles: false,
 			}
+		},
+		`gatsby-plugin-styled-components`,
+		{
+      resolve: `gatsby-plugin-webfonts`,
+      options: {
+        fonts: {
+          google: [
+            {
+              family: `Poppins`,
+              variants: [`300`, `300i`],
+						},
+						{
+							family: `Syncopate`,
+							variants: [`400`]
+						},
+						{
+							family: `Varela Round`,
+							variants: [`400`]
+						},
+          ],
+        },
+      },
 		},
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

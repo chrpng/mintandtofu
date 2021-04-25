@@ -11,8 +11,16 @@ const StyledCartItemDiv = styled.div`
 	display: flex;
 	align-items: flex-start;
 
-	border-bottom: 1px solid #aaaaaa;
 	padding: 16px 0;
+	
+	:not(:last-child) {
+		border-bottom: 1px solid #aaaaaa;
+	}
+
+	.ui.image {
+		margin-bottom: 0;
+		margin-right: 8px;
+	}
 
 	.cart-item {
 		width: 100%;
@@ -44,7 +52,7 @@ const CartItem = ({ item }) => {
 
 	return (
 		<StyledCartItemDiv>
-			<Image src={item.image[0]} alt={item.name} size='tiny' style={{ marginBottom: '0' }}/>
+			<Image src={item.image[0]} alt={item.name} size='tiny'/>
 			<div className="cart-item">
 				<div className="cart-item__name">
 					{item.name}
@@ -57,7 +65,7 @@ const CartItem = ({ item }) => {
 							quantity={item.quantity}
 						/>
 					</div>
-					<div className="cart-item__cost">
+					<div className="cart-item__cost value">
 						{formatCurrencyString({ value: item.price, currency: 'USD' })}
 					</div>
 				</div>

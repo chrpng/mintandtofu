@@ -25,9 +25,7 @@ exports.createPages = async ({ graphql, actions }) => {
 					node {
 						id
 						product {
-							metadata {
-								route
-							}
+							name
 						}
 					}
 				}
@@ -35,11 +33,14 @@ exports.createPages = async ({ graphql, actions }) => {
 		}
 	`)
 
-	const productPageTemplate = path.resolve("src/templates/ProductPage.js")
+	const productPageTemplate = path.resolve("src/templates/ProductPage.tsx")
 
 	pages.data.allStripePrice.edges.forEach(edge => {
+		const slug = edge.node.product.name.toLowerCase().replace(" ", "-")
+
 		createPage({
-			path: `/${edge.node.product.metadata.route}`,
+			path: `/${slug}`,
+			// path: `/${edge.node.product.metadata.route}`,
       component: productPageTemplate,
       context: {
         uid: edge.node.id,

@@ -8,6 +8,7 @@ export const Card = styled(Semantic.Card)`
 			height: 0;
 			padding-bottom: 100%;
 			background-color: rgba(151, 235, 83, 0.05);
+			overflow: hidden;
 
 			img {
 				transition: 0.5s transform ease-in-out;

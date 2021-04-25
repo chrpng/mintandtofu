@@ -7,10 +7,10 @@ import ProductCard from './ProductCard'
 
 const ProductMap = () => {
 	const { prices } = useStaticQuery(graphql`
-		query ProductPrices {
+		query StickerPrices {
 			prices: allStripePrice(
-				filter: {currency: {eq: "usd"}, product: {active: {eq: true}}}
-				sort: { fields: [unit_amount] }
+				filter: {currency: {eq: "usd"}, product: {active: {eq: true}, metadata: {type: {eq: "sticker"}}}}
+				sort: {fields: [unit_amount]}
 			) {
 				edges {
 					node {
@@ -25,6 +25,7 @@ const ProductMap = () => {
 							description
 							metadata {
 								route
+								type
 							}
 						}
 					}
@@ -34,7 +35,11 @@ const ProductMap = () => {
 	`)
 
 	const mapProductsToItems = products => (
-		products.edges.map(({ node }) => {
+		products.edges
+		// .filter(({ node }) => {
+		// 	return node.product.metadata.type === "sticker"
+		// })
+		.map(({ node }) => {
 			const newSku = {
 				id: node.id,
 				name: node.product.name,
