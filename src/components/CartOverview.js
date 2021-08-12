@@ -15,7 +15,7 @@ const StyledCart = styled.div`
 	.cart-header {
 		display: flex;
 		justify-content: space-between;
-		align-tems: center;
+		align-items: center;
 		border-bottom: 1px solid #aaaaaa;
 		padding: 32px 0;
 		margin-bottom: 0;

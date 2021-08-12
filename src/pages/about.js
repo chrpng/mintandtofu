@@ -1,11 +1,6 @@
 import * as React from 'react'
-
 import SEO from '../components/SEO'
-
 import { StaticImage } from "gatsby-plugin-image"
-
-import { Grid } from "semantic-ui-react"
-
 import styled from 'styled-components'
 
 const CustomGrid = styled.div`

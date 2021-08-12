@@ -46,3 +46,7 @@ h3 {
 .no-scroll {
 	overflow: hidden;
 }
+
+h2 {
+	margin: 0;
+}
